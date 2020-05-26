@@ -1,0 +1,67 @@
+public class BurgerMaker {
+    public Burger createBurger(){
+        return new Burger();
+    }
+}
+
+public class DrinkMaker {
+    public Drink createDrink(){
+        return new Drink();
+    }
+}
+
+public class FritesMaker {
+    public Frites createFrites() {
+        return new Frites();
+    }
+}
+
+public class BurgerMeal {
+
+    private Drink drink;
+    private Burger burger;
+    private Frites frites;
+
+    public BurgerMeal(Drink drink, Burger burger, Frites frites) {
+        this.drink = drink;
+        this.burger = burger;
+        this.frites = frites;
+    }
+
+    @Override
+    public String toString() {
+        return "BurgerMeal{" +
+                "drink=" + drink +
+                ", burger=" + burger +
+                ", frites=" + frites +
+                '}';
+    }
+}
+
+public class Waiter {
+
+    private DrinkMaker drinkMaker;
+    private BurgerMaker burgerMaker;
+    private FritesMaker fritesMaker;
+
+    public Waiter() {
+        this.drinkMaker = new DrinkMaker();
+        this.burgerMaker = new BurgerMaker();
+        this.fritesMaker = new FritesMaker();
+    }
+
+    public BurgerMeal orderBurgermeal(){
+        return  new BurgerMeal(drinkMaker.createDrink(),
+                burgerMaker.createBurger(),
+                fritesMaker.createFrites());
+    }
+}
+
+public class Main {
+
+    public static void main(String[] args) {
+        Waiter waiter = new Waiter();
+        BurgerMeal meal = waiter.orderBurgermeal();
+        System.out.println(meal);
+    }
+}
